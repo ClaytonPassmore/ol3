@@ -51,8 +51,12 @@ ol.source.TileUTFGrid = function(options) {
    */
   this.template_ = undefined;
 
-  var request = new goog.net.Jsonp(options.url);
-  request.send(undefined, goog.bind(this.handleTileJSONResponse, this));
+  if(options.json) {
+    this.handleTileJSONResponse(options.json)
+  } else {
+    var request = new goog.net.Jsonp(options.url);
+    request.send(undefined, goog.bind(this.handleTileJSONResponse, this));
+  }
 };
 goog.inherits(ol.source.TileUTFGrid, ol.source.Tile);
 
